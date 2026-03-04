@@ -276,7 +276,8 @@ export const useSplashStore = create<SplashState>((set, get) => ({
       const totalImages = splashData.images.length;
       
       splashData.images.forEach((image, index) => {
-        zip.file(image.name, image.bmpData);
+        const fileName = image.name.endsWith('.bmp') ? image.name : `${image.name}.bmp`;
+        zip.file(fileName, image.bmpData);
         const progress = Math.round(((index + 1) / totalImages) * 100);
         set({ packImagesProgress: progress });
       });
